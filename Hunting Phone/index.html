@@ -19,11 +19,19 @@
         <button onclick="handleSearch()" class="btn btn-accent">Search</button>
       </section>
 
+      <div id="loading-spinner" class="text-center my-40 hidden">
+        <span class="loading loading-spinner loading-lg"></span>
+      </div>
+
+
     <section>
       <div id="phone-container" class="grid grid-cols-1 md:grid-cols2 lg:grid-cols-3 gap-4"></div>
-      <div id="show-all-container" class="hidden">
-        <button class="btn btn-accent">Show All</button>
+      <div id="show-all-container" class="hidden text-center mt-5 mb-5">
+        <button onclick="handleShowAll()" class="btn btn-accent ">Show All</button>
       </div>
+
+     
+
     </section>
   </main>
   <footer></footer>
