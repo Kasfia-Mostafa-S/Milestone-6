@@ -1,4 +1,4 @@
-const loadPhone = async (searchText,isShowAll) => {
+const loadPhone = async (searchText='13',isShowAll) => {
   const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
   const data = await res.json();
   const phones = data.data
@@ -7,7 +7,7 @@ const loadPhone = async (searchText,isShowAll) => {
 }
 
 const displayPhone = (phones,isShowAll) => {
-   console.log(phones)
+  //  console.log(phones);
 
    const phoneContainer = document.getElementById('phone-container');
   //  clear container
@@ -21,7 +21,7 @@ const displayPhone = (phones,isShowAll) => {
   else{
     showAllContainer.classList.add('hidden');
   }
-   console.log('is show all',isShowAll)
+  //  console.log('is show all',isShowAll)
   //  display only when if not show all
   if(!isShowAll){
     phones = phones.slice(0,12);
@@ -53,11 +53,29 @@ const displayPhone = (phones,isShowAll) => {
 }
 
 const handleShowDetails = async (id) => {
-  console.log('clicked show details',id)
+  // console.log('clicked show details',id)
   // loadData
-  const res = await fetch(` https://openapi.programming-hero.com/api/phone/${id}`)
+  const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
   const data = await res.json();
-  console.log(data)
+  const phone = data.data;
+
+  showPhoneDetails(phone)
+}
+
+const showPhoneDetails = (phone) => {
+  console.log(phone);
+  const phoneName = document.getElementById('phone-name');
+  phoneName.innerText = phone.name;
+
+  const showDetailContainer = document.getElementById('show-detail.container')
+  showDetailContainer.innerHTML=`
+  <img src='${phone.image}' alt=''/>
+  <p><span>Storage:</span>${phone?.mainFeatures?.storage}</p>
+  <p><span>GPS:</span>${phone?.others?.GPS}</p>
+  `
+
+
+  show_details_modal.showModal()
 }
 
 // handle search button
@@ -86,4 +104,4 @@ const handleShowAll = () => {
 };
 
 
-// loadPhone()
+loadPhone()
